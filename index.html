@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para você</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        /* Container simulando a tela do smartphone */
+        .phone-container {
+            width: 360px;
+            height: 700px;
+            background: linear-gradient(180deg, #d32f2f 0%, #8e0000 100%);
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border: 8px solid #222;
+        }
+        /* Notch do topo */
+        .phone-container::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            width: 120px;
+            height: 25px;
+            background-color: #222;
+            border-radius: 15px;
+            z-index: 10;
+        }
+        .screen {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.5;
+            padding: 0 10px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            position: relative;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            min-height: 60px;
+        }
+        button, .btn {
+            background-color: #ffffff;
+            color: #d32f2f;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.1s;
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        #btn-nao {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-container">
+        <div class="screen" id="tela-1">
+            <div class="emoji">🥺</div>
+            <h2>Meu amor, me desculpa por tudo. Eu errei e estou muito arrependido...</h2>
+            <button onclick="proximaTela()">Continuar</button>
+        </div>
+
+        <div class="screen hidden" id="tela-2">
+            <div class="emoji">❤️</div>
+            <h2>Depois de tudo, você ainda me ama?</h2>
+            <div class="btn-group">
+                <button id="btn-sim" onclick="aceito()">Sim</button>
+                <button id="btn-nao" onmouseover="fugir()" onclick="fugir()">Não</button>
+            </div>
+        </div>
+
+        <div class="screen hidden" id="tela-3">
+            <div class="emoji">💖</div>
+            <h2>Eu sabia! Te amo muito, prometo ser melhor a cada dia! 🥰</h2>
+        </div>
+    </div>
+
+    <script>
+        function proximaTela() {
+            document.getElementById('tela-1').classList.add('hidden');
+            document.getElementById('tela-2').classList.remove('hidden');
+        }
+
+        function aceito() {
+            document.getElementById('tela-2').classList.add('hidden');
+            document.getElementById('tela-3').classList.remove('hidden');
+        }
+
+        function fugir() {
+            const btnNao = document.getElementById('btn-nao');
+            // Faz o botão "Não" fugir para um lugar aleatório dentro da tela
+            const maxX = 100;
+            const maxY = 80;
+            const randomX = (Math.random() - 0.5) * maxX * 2;
+            const randomY = (Math.random() - 0.5) * maxY * 2;
+            btnNao.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+    </script>
+</body>
+</html>
